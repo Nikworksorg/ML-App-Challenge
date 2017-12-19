@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ml-app-challenge</string>
+    <string name="launch_open_button">Open</string>
 </resources>
