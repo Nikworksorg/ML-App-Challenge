@@ -7,16 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".activities.WelcomeActivity">
+    tools:mContext=".activities.WelcomeActivity">
 
     <Button
         android:id="@+id/open_button"
         android:textAllCaps="false"
         android:background="@color/lightBlue"
         android:textColor="@android:color/white"
-        android:text="@string/launch_open_button"
-        android:layout_height="@dimen/launch_open_button_height"
-        android:layout_width="@dimen/launch_open_button_width"/>
+        android:text="@string/welcome_open_button"
+        android:layout_height="@dimen/welcome_open_button_height"
+        android:layout_width="@dimen/welcome_open_button_width"/>
 
 
 </LinearLayout>

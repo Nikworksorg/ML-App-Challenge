@@ -1,0 +1,53 @@
+package com.appchallenge.ml_app_challenge.models;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+/**
+ * Created by nikhilthiruvengadam on 12/19/17.
+ */
+
+public class TransactionActivity implements Serializable {
+    @SerializedName("id")
+    private Integer mId;
+
+    @SerializedName("date")
+    private String mDate;
+
+    @SerializedName("description")
+    private String mDescription;
+
+    @SerializedName("withdrawal_amount")
+    private String mWithDrawableAmount;
+
+    @SerializedName("balance")
+    private String mBalance;
+
+    @SerializedName("transaction_uid")
+    private Long  mTransactionUuid;
+
+    public Integer getmId() {
+        return mId;
+    }
+
+    public String getmDate() {
+        return mDate;
+    }
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public String getmWithDrawableAmount() {
+        return mWithDrawableAmount;
+    }
+
+    public String getmBalance() {
+        return mBalance;
+    }
+
+    public Long getmTransactionUuid() {
+        return mTransactionUuid;
+    }
+}

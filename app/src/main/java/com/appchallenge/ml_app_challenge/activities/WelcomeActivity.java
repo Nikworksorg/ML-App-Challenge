@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.appchallenge.ml_app_challenge.R;
-import com.appchallenge.ml_app_challenge.presenters.LaunchPresenter;
+import com.appchallenge.ml_app_challenge.models.DataManager;
+import com.appchallenge.ml_app_challenge.presenters.WelcomePresenter;
 import com.appchallenge.ml_app_challenge.views.WelcomeMvpView;
 
 import butterknife.ButterKnife;
@@ -14,7 +15,7 @@ import timber.log.Timber;
 
 public class WelcomeActivity extends BaseActivity implements WelcomeMvpView {
 
-    LaunchPresenter mLaunchPresenter;
+    WelcomePresenter mWelcomePresenter;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, WelcomeActivity.class);
@@ -27,14 +28,15 @@ public class WelcomeActivity extends BaseActivity implements WelcomeMvpView {
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
 
-        Timber.i("Presented Launch Activity");
+        Timber.i("Presented Welcome Activity");
 
         //DataManager dataManager = ((MvpApp) getApplication()).getDataManager();
+        DataManager dataManager = DataManager.getInstance(this);
 
         //mAccountPresenter = new AccountPresenter(dataManager); //Bind Data here
 
-        mLaunchPresenter = new LaunchPresenter();
-        mLaunchPresenter.onAttach(this);
+        mWelcomePresenter = new WelcomePresenter();
+        mWelcomePresenter.onAttach(this);
     }
 
     @Override

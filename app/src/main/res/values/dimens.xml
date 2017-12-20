@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name = "launch_open_button_width"> 100dp </dimen>
-    <dimen name = "launch_open_button_height"> 50dp </dimen>
+    <dimen name = "welcome_open_button_width"> 100dp </dimen>
+    <dimen name = "welcome_open_button_height"> 50dp </dimen>
 </resources>
