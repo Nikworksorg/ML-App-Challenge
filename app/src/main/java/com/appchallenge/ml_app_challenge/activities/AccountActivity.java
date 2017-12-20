@@ -92,8 +92,6 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -107,6 +105,11 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
     @Override
     public void quitApplication() {
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Timber.i("Back button pressed");
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.models.TransactionActivity;
 import com.appchallenge.ml_app_challenge.models.TransactionEvent;
 import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
+import com.appchallenge.ml_app_challenge.utils.DateUtils;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
 import java.util.ArrayList;
@@ -41,11 +42,7 @@ public class AccountTransactionPresenter<V extends AccountTransactionMvpView> ex
 
             }
             getMvpView().renderTitle(title);
-
             ArrayList<TransactionRenderModel> transactionRenderModels = new ArrayList<>();
-
-
-            Timber.i("Test");
             getMvpView().renderTransactionList(populateAccountRenderModel(accountTransactions,
                     transactionRenderModels));
         }
@@ -72,48 +69,53 @@ public class AccountTransactionPresenter<V extends AccountTransactionMvpView> ex
                 transactionRenderModels = populateAccountRenderModel(transaction.get(key),transactionRenderModels);
             }
         }
-        Timber.i("Test");
         getMvpView().renderTransactionList(transactionRenderModels);
     }
 
     private ArrayList<TransactionRenderModel> populateAccountRenderModel(ArrayList<TransactionEvent> accountTransactions, ArrayList<TransactionRenderModel> transactionRenderModels){
         for (TransactionEvent transactionEvent : accountTransactions) {
-            if (transactionEvent.getmDate() != null) {
+            if (transactionEvent.getmDate() != null && DateUtils.isValidDate(transactionEvent.getmDate())) {
                 TransactionRenderModel transactionRenderModel = new TransactionRenderModel();
-                transactionRenderModel.setmDate(transactionEvent.getmDate());
+                transactionRenderModel.setmDate(DateUtils.formatDate(transactionEvent.getmDate()));
                 transactionRenderModel.setmRowType(TransactionRenderModel.RowType.DATE_LIST_ITEM.ordinal());
                 transactionRenderModels.add(transactionRenderModel);
-            }
-            for (TransactionActivity transactionActivity : transactionEvent.getmTransactionActivities()) {
-                if (transactionActivity.getmTransactionUuid() != null ||
-                        transactionActivity.getmWithDrawableAmount() != null ||
-                        transactionActivity.getmWithDrawableAmount() != null ||
-                        transactionActivity.getmDepositAmount() != null ||
-                        transactionActivity.getmDescription() != null) {
-                    TransactionRenderModel transactionRenderModel2 = new TransactionRenderModel();
-                    if (transactionActivity.getmTransactionUuid() != null) {
+                ArrayList<TransactionActivity> transactionActivities = transactionEvent.getmTransactionActivities();
+                for (TransactionActivity transactionActivity : transactionActivities) {
+                    if (transactionActivity.getmTransactionUuid() != null ||
+                            transactionActivity.getmWithDrawableAmount() != null ||
+                            transactionActivity.getmWithDrawableAmount() != null ||
+                            transactionActivity.getmDepositAmount() != null ||
+                            transactionActivity.getmDescription() != null) {
+                        TransactionRenderModel transactionRenderModel2 = new TransactionRenderModel();
+                        if (transactionActivity.getmTransactionUuid() != null) {
+                            transactionRenderModel2.setmUuid(String.format("%s: %d", getmContext().getString(R.string.uuid),
+                                    transactionActivity.getmTransactionUuid()));
+                        }
 
-                        transactionRenderModel2.setmUuid(String.format("%d", transactionActivity.getmTransactionUuid()));
-                    }
+                        if (transactionActivity.getmWithDrawableAmount() != null) {
+                            transactionRenderModel2.setmAmount(String.format("%s: $%s", getmContext().getString(R.string.withdrawal),
+                                    transactionActivity.getmWithDrawableAmount()));
+                        } else if (transactionActivity.getmDepositAmount() != null) {
+                            transactionRenderModel2.setmAmount(String.format("%s: $%s", getmContext().getString(R.string.deposit),
+                                    transactionActivity.getmDepositAmount()));
+                        }
 
-                    if (transactionActivity.getmWithDrawableAmount() != null) {
-                        transactionRenderModel2.setmAmount(String.format("%s: $%s", getmContext().getString(R.string.withdrawal),
-                                transactionActivity.getmWithDrawableAmount()));
-                    } else if (transactionActivity.getmDepositAmount() != null) {
-                        transactionRenderModel2.setmAmount(String.format("%s: $%s", getmContext().getString(R.string.deposit),
-                                transactionActivity.getmDepositAmount()));
-                    }
+                        if (transactionActivity.getmBalance() != null) {
+                            transactionRenderModel2.setmBalance(String.format("%s: $%s", getmContext().getString(R.string.balance),
+                                    transactionActivity.getmBalance()));
+                        }
 
-                    if (transactionActivity.getmBalance() != null) {
-                        transactionRenderModel2.setmBalance(String.format("%s: $%s", getmContext().getString(R.string.balance),
-                                transactionActivity.getmBalance()));
-                    }
+                        if (transactionActivity.getmDescription() != null) {
+                            transactionRenderModel2.setmDescription(String.format("%s: %s", getmContext().getString(R.string.description),
+                                    transactionActivity.getmDescription()));
+                        }
+                        transactionRenderModel2.setmRowType(TransactionRenderModel.RowType.ACCOUNT_LIST_ITEM.ordinal());
+                        if (transactionActivities.indexOf(transactionActivity) == transactionActivities.size() - 1) {
+                            transactionRenderModel2.setSeparatorHidden(true);
+                        }
 
-                    if (transactionActivity.getmDescription() != null) {
-                        transactionRenderModel2.setmDescription(transactionActivity.getmDescription());
+                        transactionRenderModels.add(transactionRenderModel2);
                     }
-                    transactionRenderModel2.setmRowType(TransactionRenderModel.RowType.ACCOUNT_LIST_ITEM.ordinal());
-                    transactionRenderModels.add(transactionRenderModel2);
                 }
             }
         }

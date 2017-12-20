@@ -12,9 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -255,4 +259,5 @@
             android:background="@android:color/black" />
 
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>

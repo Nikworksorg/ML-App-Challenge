@@ -11,6 +11,10 @@ import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.presenters.WelcomePresenter;
 import com.appchallenge.ml_app_challenge.views.WelcomeMvpView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -69,6 +69,9 @@ public class TransactionAdapter extends BaseAdapter {
         TextView mDescription;
 
 
+        @BindView(R.id.separator)
+        View mSeparator;
+
         public AccountViewHolder(View view){
             ButterKnife.bind(this, view);
         }
@@ -117,7 +120,6 @@ public class TransactionAdapter extends BaseAdapter {
         final TransactionRenderModel transactionRenderModel = mTransactionRenderModels.get(position);
 
         if (getItemViewType(position) == TransactionRenderModel.RowType.ACCOUNT_NAME_LIST_ITEM.ordinal()) {
-            Timber.i("Nik ACCOUNT_NAME_LIST_ITEM");
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.layout_transaction_account_name_list_item, null);
                 mAccountNameViewHolder = new AccountNameViewHolder(convertView);
@@ -127,7 +129,6 @@ public class TransactionAdapter extends BaseAdapter {
             }
             mAccountNameViewHolder.mAccountName.setText(transactionRenderModel.getmAccountName());
         } else if (getItemViewType(position) == TransactionRenderModel.RowType.DATE_LIST_ITEM.ordinal()) {
-            Timber.i("Nik ACCOUNT_NAME_LIST_ITEM");
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.layout_transaction_date_list_item, null);
                 mDateViewHolder = new DateViewHolder(convertView);
@@ -148,6 +149,7 @@ public class TransactionAdapter extends BaseAdapter {
             mAccountViewHolder.mAmount.setText(transactionRenderModel.getmAmount());
             mAccountViewHolder.mBalance.setText(transactionRenderModel.getmBalance());
             mAccountViewHolder.mDescription.setText(transactionRenderModel.getmDescription());
+            mAccountViewHolder.mSeparator.setVisibility((transactionRenderModel.getSeparatorHidden())?View.GONE:View.VISIBLE);
         }
         return convertView;
     }

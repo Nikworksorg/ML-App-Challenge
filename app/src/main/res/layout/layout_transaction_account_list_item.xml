@@ -43,13 +43,16 @@
             android:text="Description: Gas"
             android:textColor="@android:color/black" />
 
-        <View
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/separator_height"
-            android:background="@color/separatorColor" />
 
     </LinearLayout>
+
+    <View
+        android:layout_marginLeft="@dimen/list_item_margin"
+        android:layout_marginRight="@dimen/list_item_margin"
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_height"
+        android:background="@color/separatorColor" />
 
   
 </LinearLayout>

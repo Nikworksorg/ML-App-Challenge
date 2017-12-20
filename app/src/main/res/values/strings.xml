@@ -11,9 +11,10 @@
     <string name="all_transactions">All Transactions</string>
     <string name="chequing_transactions">Chequing Transactions</string>
     <string name="savings_transactions">Savings Transactions</string>
-    <string name="tfsa_transactions">Tfsa Transactions</string>
+    <string name="tfsa_transactions">TFSA Transactions</string>
     <string name="balance">Balance</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="deposit">Deposit</string>
     <string name="description">Description</string>
+    <string name="uuid">UUID</string>
 </resources>

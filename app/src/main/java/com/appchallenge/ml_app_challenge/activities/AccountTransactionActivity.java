@@ -74,12 +74,15 @@ public class AccountTransactionActivity extends BaseActivity implements AccountT
 
     @Override
     public void renderTitle(String title) {
-        setTitle(title);
+        if(title != null) {
+            setTitle(title);
+        }
     }
 
     @Override
     public void renderTransactionList(ArrayList<TransactionRenderModel> transactionRenderModels) {
-        mListView.setAdapter(new TransactionAdapter(this, transactionRenderModels));
-
+        if(transactionRenderModels != null) {
+            mListView.setAdapter(new TransactionAdapter(this, transactionRenderModels));
+        }
     }
 }

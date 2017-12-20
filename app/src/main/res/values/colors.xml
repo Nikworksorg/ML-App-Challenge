@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#159DEB</color>
-    <color name="colorPrimaryDark">#159DEB</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="lightBlue">#159DEB</color>
+    <color name="colorPrimary">#4a8eff</color>
+    <color name="colorPrimaryDark">#4a8eff</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="lightBlue">#4a8eff</color>
+    <color name="darkBlue">#385ce4</color>
     <color name="headerBgColor">#ececec</color>
     <color name="contentBgColor">#f4f4f4</color>
     <color name="separatorColor">#c8c7cc</color>
     <color name="dateItemColor">#c8c7cc</color>
-    <color name="accountItemColor">#159DEB</color>
+    <color name="accountItemColor">#4a8eff</color>
 </resources>

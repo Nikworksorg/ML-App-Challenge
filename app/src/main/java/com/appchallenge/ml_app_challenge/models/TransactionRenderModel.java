@@ -23,6 +23,7 @@ public class TransactionRenderModel implements Serializable{
     private String mBalance;
     private String mDescription ;
     private Integer mRowType = -1;
+    private Boolean isSeparatorHidden = false;
 
     public String getmAccountName() {
         return mAccountName;
@@ -78,5 +79,13 @@ public class TransactionRenderModel implements Serializable{
 
     public void setmRowType(Integer mRowType) {
         this.mRowType = mRowType;
+    }
+
+    public Boolean getSeparatorHidden() {
+        return isSeparatorHidden;
+    }
+
+    public void setSeparatorHidden(Boolean separatorHidden) {
+        isSeparatorHidden = separatorHidden;
     }
 }
