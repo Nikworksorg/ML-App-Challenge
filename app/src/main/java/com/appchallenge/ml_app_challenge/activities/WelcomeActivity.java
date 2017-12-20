@@ -58,6 +58,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeMvpView
     }
 
     @OnClick(R.id.open_button) void onOpenButtonClick() {
+        mWelcomePresenter.unsetShowWelcome();
         openAccountActivity();
     }
 

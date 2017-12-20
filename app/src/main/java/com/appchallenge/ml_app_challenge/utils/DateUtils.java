@@ -23,6 +23,9 @@ public class DateUtils {
     }
 
     public static boolean isValidDate(String sDate){
+        if(sDate == null){
+            return false;
+        }
         Date parsedDate = null;
         Date todayDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

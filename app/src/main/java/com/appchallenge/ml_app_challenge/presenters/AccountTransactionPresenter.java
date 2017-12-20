@@ -119,6 +119,4 @@ public class AccountTransactionPresenter<V extends AccountTransactionMvpView> ex
         }
         return transactionRenderModels;
     }
-
-
 }

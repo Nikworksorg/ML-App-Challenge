@@ -59,7 +59,5 @@ public class AccountPresenter <V extends AccountMvpView> extends BasePresenter<V
             }
             getMvpView().openAccountTransaction(passingAccountModel);
         }
-
-
     }
 }

@@ -104,6 +104,7 @@ public class AccountActivity extends AppCompatActivity implements AccountMvpView
 
     @Override
     public void quitApplication() {
+         mAccountPresenter.setShowWelcome();
         finish();
     }
 
