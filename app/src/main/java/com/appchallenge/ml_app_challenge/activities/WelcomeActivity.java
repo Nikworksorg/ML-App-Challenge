@@ -3,6 +3,7 @@ package com.appchallenge.ml_app_challenge.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.support.v7.widget.Toolbar;
 
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
-public class WelcomeActivity extends BaseActivity implements WelcomeMvpView {
+public class WelcomeActivity extends AppCompatActivity implements WelcomeMvpView {
 
     private WelcomePresenter mWelcomePresenter;
 

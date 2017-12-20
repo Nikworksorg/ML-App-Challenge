@@ -3,6 +3,7 @@ package com.appchallenge.ml_app_challenge.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
-public class AccountActivity extends BaseActivity implements AccountMvpView {
+public class AccountActivity extends AppCompatActivity implements AccountMvpView {
 
     AccountPresenter mAccountPresenter;
 
