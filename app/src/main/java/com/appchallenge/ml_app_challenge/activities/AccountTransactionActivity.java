@@ -3,6 +3,8 @@ package com.appchallenge.ml_app_challenge.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.appchallenge.ml_app_challenge.R;
 import com.appchallenge.ml_app_challenge.presenters.AccountTransactionPresenter;
@@ -25,9 +27,27 @@ public class AccountTransactionActivity extends BaseActivity implements AccountT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_transaction);
         ButterKnife.bind(this);
+
         Timber.i("Presented Account Transaction Activity");
 
-        mAccountTransactionPresenter.onAttach(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setTitle(getString(R.string.transaction_activity_title));
+
+
         mAccountTransactionPresenter = new AccountTransactionPresenter();
+        mAccountTransactionPresenter.onAttach(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

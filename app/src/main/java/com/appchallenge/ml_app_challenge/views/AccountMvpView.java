@@ -5,5 +5,6 @@ package com.appchallenge.ml_app_challenge.views;
  */
 
 public interface AccountMvpView extends MvpView{
-    //Fill in the necessary functions
+    public void quitApplication();
+    public void openAccountTransaction();
 }

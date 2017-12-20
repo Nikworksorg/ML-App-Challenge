@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">ml-app-challenge</string>
+    <string name="app_name">Bank App</string>
     <string name="welcome_open_button">Open</string>
+    <string name="menu_quit">Quit</string>
+    <string name="welcome_activity_title">Welcome</string>
+    <string name="account_activity_title">Account</string>
+    <string name="transaction_activity_title">Transaction</string>
+    <string name="welcome_body_text">Please press the below button to view all the accounts</string>
 </resources>

@@ -33,7 +33,6 @@ public class DataManager {
     private SharedPreferences.Editor mEditor;
 
     public DataManager(Context context) {
-        //sharedPreferences = context.getSharedPreferences(sharedPreferenceName, 0); I have to complete this later
         initialiseData(context);
     }
 
