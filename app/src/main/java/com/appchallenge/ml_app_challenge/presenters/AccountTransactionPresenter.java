@@ -1,5 +1,8 @@
 package com.appchallenge.ml_app_challenge.presenters;
 
+import android.content.Context;
+
+import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
 /**
@@ -7,6 +10,7 @@ import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
  */
 
 public class AccountTransactionPresenter <V extends AccountTransactionMvpView> extends BasePresenter<V> implements AccountTransactionMvpPresenter<V> {
-    public AccountTransactionPresenter(/*DataManager dataManager*/) {
+    public AccountTransactionPresenter(Context context, DataManager dataManager) {
+        super(context, dataManager);
     }
 }

@@ -1,5 +1,8 @@
 package com.appchallenge.ml_app_challenge.presenters;
 
+import android.content.Context;
+
+import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.views.WelcomeMvpView;
 
 /**
@@ -8,11 +11,19 @@ import com.appchallenge.ml_app_challenge.views.WelcomeMvpView;
 
 public class WelcomePresenter<V extends WelcomeMvpView> extends BasePresenter<V> implements WelcomeMvpPresenter<V> {
 
-    public WelcomePresenter(/*DataManager dataManager*/) {
+    public WelcomePresenter(Context context, DataManager dataManager) {
+        super(context, dataManager);
     }
 
     @Override
-    public void decideNextActivity() {
+    public void computeNextActivity() {
+        if(!getDataManager().loadShowWelcome(getmContext())){
+            getMvpView().openAccountActivity();
+        }
+    }
 
+    @Override
+    public void unsetShowWelcome() {
+        getDataManager().saveShowWelcome(getmContext(), false);
     }
 }

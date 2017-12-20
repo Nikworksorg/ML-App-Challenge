@@ -7,4 +7,5 @@ import com.appchallenge.ml_app_challenge.views.AccountMvpView;
  */
 
 public interface AccountMvpPresenter<V extends AccountMvpView> extends MvpPresenter<V> {
+    public void setShowWelcome();
 }

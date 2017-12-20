@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.appchallenge.ml_app_challenge.R;
+import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.presenters.AccountTransactionPresenter;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
@@ -36,8 +37,9 @@ public class AccountTransactionActivity extends BaseActivity implements AccountT
 
         setTitle(getString(R.string.transaction_activity_title));
 
+        DataManager dataManager = DataManager.getInstance(this);
 
-        mAccountTransactionPresenter = new AccountTransactionPresenter();
+        mAccountTransactionPresenter = new AccountTransactionPresenter(this, dataManager);
         mAccountTransactionPresenter.onAttach(this);
     }
 

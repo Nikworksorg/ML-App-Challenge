@@ -1,5 +1,8 @@
 package com.appchallenge.ml_app_challenge.presenters;
 
+import android.content.Context;
+
+import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.views.AccountMvpView;
 
 /**
@@ -7,6 +10,12 @@ import com.appchallenge.ml_app_challenge.views.AccountMvpView;
  */
 
 public class AccountPresenter <V extends AccountMvpView> extends BasePresenter<V> implements AccountMvpPresenter<V> {
-    public AccountPresenter(/*DataManager dataManager*/) {
+    public AccountPresenter(Context context, DataManager dataManager) {
+        super(context, dataManager);
+    }
+
+    @Override
+    public void setShowWelcome() {
+        getDataManager().saveShowWelcome(getmContext(), true);
     }
 }

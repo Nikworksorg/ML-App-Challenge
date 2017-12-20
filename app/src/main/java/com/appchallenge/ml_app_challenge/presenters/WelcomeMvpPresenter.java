@@ -7,5 +7,6 @@ import com.appchallenge.ml_app_challenge.views.WelcomeMvpView;
  */
 
 public interface WelcomeMvpPresenter<V extends WelcomeMvpView> extends MvpPresenter<V> {
-    void decideNextActivity();
+    void computeNextActivity();
+    void unsetShowWelcome();
 }

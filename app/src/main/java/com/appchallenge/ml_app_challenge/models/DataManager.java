@@ -32,7 +32,7 @@ public class DataManager {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
-    public DataManager(Context context) {
+    private DataManager(Context context) {
         initialiseData(context);
     }
 

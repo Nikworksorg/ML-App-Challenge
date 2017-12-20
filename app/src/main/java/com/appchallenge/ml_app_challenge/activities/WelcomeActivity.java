@@ -40,8 +40,9 @@ public class WelcomeActivity extends BaseActivity implements WelcomeMvpView {
 
         DataManager dataManager = DataManager.getInstance(this);
 
-        mWelcomePresenter = new WelcomePresenter();
+        mWelcomePresenter = new WelcomePresenter(this, dataManager);
         mWelcomePresenter.onAttach(this);
+        mWelcomePresenter.computeNextActivity();
     }
 
     @Override

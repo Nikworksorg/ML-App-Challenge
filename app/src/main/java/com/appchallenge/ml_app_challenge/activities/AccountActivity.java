@@ -41,7 +41,7 @@ public class AccountActivity extends BaseActivity implements AccountMvpView {
         DataManager dataManager = DataManager.getInstance(this);
 
 
-        mAccountPresenter = new AccountPresenter();
+        mAccountPresenter = new AccountPresenter(this, dataManager);
         mAccountPresenter.onAttach(this);
     }
 

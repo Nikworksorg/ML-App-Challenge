@@ -1,5 +1,8 @@
 package com.appchallenge.ml_app_challenge.presenters;
 
+import android.content.Context;
+
+import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.views.MvpView;
 
 /**
@@ -8,12 +11,13 @@ import com.appchallenge.ml_app_challenge.views.MvpView;
 
 public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
     private V mMvpView;
+    private DataManager mDataManager;
+    private Context mContext;
 
-    //DataManager mDataManager;
 
-
-    public BasePresenter(/*DataManager dataManager*/){
-        //mDataManager = dataManager;
+    public BasePresenter(Context context, DataManager dataManager){
+        mContext = context;
+        mDataManager = dataManager;
     }
 
     @Override
@@ -25,7 +29,11 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
         return mMvpView;
     }
 
-//    public DataManager getDataManager() {
-//        return mDataManager;
-//    }
+    public DataManager getDataManager() {
+        return mDataManager;
+    }
+
+    public Context getmContext() {
+        return mContext;
+    }
 }

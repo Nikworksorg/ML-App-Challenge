@@ -7,4 +7,5 @@ import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
  */
 
 public interface AccountTransactionMvpPresenter<V extends AccountTransactionMvpView> extends MvpPresenter<V> {
+
 }
