@@ -1,5 +1,6 @@
 package com.appchallenge.ml_app_challenge.presenters;
 
+import com.appchallenge.ml_app_challenge.models.Account;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
 /**
@@ -7,5 +8,6 @@ import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
  */
 
 public interface AccountTransactionMvpPresenter<V extends AccountTransactionMvpView> extends MvpPresenter<V> {
-
+    void computeAccount(Account account);
+    void computeAllTransactions();
 }

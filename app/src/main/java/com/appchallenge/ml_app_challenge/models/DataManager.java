@@ -45,18 +45,23 @@ public class DataManager {
 
     private void initialiseData(Context context){
         try {
-            mAccountList = fetchList(context, "listOfAccounts.json");
-            mCheckingAccountTransactions = fetchList(context, "chequingAccount.json");
-            mSavingsAccountTransactions = fetchList(context, "savingsAccount.json");
-            mTfsaAccountTransactions = fetchList(context, "TfsaAccount.json");
-            mOverallTransactions = fetchList(context, "accountTransactions.json");
+            mAccountList = fetchList(context, "listOfAccounts.json",
+                    new TypeToken<ArrayList<Account>>(){}.getType());
+            mCheckingAccountTransactions = fetchList(context, "chequingAccount.json",
+                    new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
+            mSavingsAccountTransactions = fetchList(context, "savingsAccount.json",
+                    new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
+            mTfsaAccountTransactions = fetchList(context, "TfsaAccount.json",
+                    new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
+            mOverallTransactions = fetchList(context, "accountTransactions.json",
+                    new TypeToken<ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>>>(){}.getType());
+            Timber.i("Test");
         }catch(Exception ex){
             Timber.i("Unable to parse data from file: %s", ex.toString());
         }
     }
 
-    private <T> ArrayList<T> fetchList(Context context, String fileName) {
-        Type type =  new TypeToken<ArrayList<T>>(){}.getType();
+    private <T> ArrayList<T> fetchList(Context context, String fileName, Type type) {
         return new Gson().fromJson(loadJSONFromAsset(context, fileName), type);
     }
 

@@ -29,7 +29,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V>{
         return mMvpView;
     }
 
-    public DataManager getDataManager() {
+    public DataManager getmDataManager() {
         return mDataManager;
     }
 

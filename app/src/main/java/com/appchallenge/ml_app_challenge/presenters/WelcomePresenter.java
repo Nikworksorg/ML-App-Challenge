@@ -17,13 +17,13 @@ public class WelcomePresenter<V extends WelcomeMvpView> extends BasePresenter<V>
 
     @Override
     public void computeNextActivity() {
-        if(!getDataManager().loadShowWelcome(getmContext())){
+        if(!getmDataManager().loadShowWelcome(getmContext())){
             getMvpView().openAccountActivity();
         }
     }
 
     @Override
     public void unsetShowWelcome() {
-        getDataManager().saveShowWelcome(getmContext(), false);
+        getmDataManager().saveShowWelcome(getmContext(), false);
     }
 }

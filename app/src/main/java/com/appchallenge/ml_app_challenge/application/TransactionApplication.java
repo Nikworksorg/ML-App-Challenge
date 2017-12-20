@@ -2,6 +2,7 @@ package com.appchallenge.ml_app_challenge.application;
 
 import android.app.Application;
 
+import timber.log.BuildConfig;
 import timber.log.Timber;
 
 /**
@@ -12,6 +13,5 @@ public class TransactionApplication extends Application {
     @Override public void onCreate() {
         super.onCreate();
         Timber.plant(new Timber.DebugTree());
-
     }
 }

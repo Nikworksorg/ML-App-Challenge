@@ -21,6 +21,9 @@ public class TransactionActivity implements Serializable {
     @SerializedName("withdrawal_amount")
     private String mWithDrawableAmount;
 
+    @SerializedName("deposit_amount")
+    private String mDepositAmount;
+
     @SerializedName("balance")
     private String mBalance;
 
@@ -49,5 +52,9 @@ public class TransactionActivity implements Serializable {
 
     public Long getmTransactionUuid() {
         return mTransactionUuid;
+    }
+
+    public String getmDepositAmount() {
+        return mDepositAmount;
     }
 }

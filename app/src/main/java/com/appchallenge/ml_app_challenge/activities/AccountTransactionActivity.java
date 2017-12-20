@@ -5,18 +5,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.appchallenge.ml_app_challenge.R;
+import com.appchallenge.ml_app_challenge.adapters.TransactionAdapter;
+import com.appchallenge.ml_app_challenge.models.Account;
 import com.appchallenge.ml_app_challenge.models.DataManager;
+import com.appchallenge.ml_app_challenge.models.TransactionEvent;
+import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
 import com.appchallenge.ml_app_challenge.presenters.AccountTransactionPresenter;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class AccountTransactionActivity extends BaseActivity implements AccountTransactionMvpView {
 
     AccountTransactionPresenter mAccountTransactionPresenter;
+
+    @BindView(R.id.list_view)
+    ListView mListView;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, AccountTransactionActivity.class);
@@ -35,12 +47,19 @@ public class AccountTransactionActivity extends BaseActivity implements AccountT
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setTitle(getString(R.string.transaction_activity_title));
+        Account account = (Account) getIntent().getSerializableExtra("account");
 
         DataManager dataManager = DataManager.getInstance(this);
 
         mAccountTransactionPresenter = new AccountTransactionPresenter(this, dataManager);
         mAccountTransactionPresenter.onAttach(this);
+        if(account != null) {
+            mAccountTransactionPresenter.computeAccount(account);
+        }
+        else{
+            mAccountTransactionPresenter.computeAllTransactions();
+        }
+
     }
 
     @Override
@@ -51,5 +70,16 @@ public class AccountTransactionActivity extends BaseActivity implements AccountT
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void renderTitle(String title) {
+        setTitle(title);
+    }
+
+    @Override
+    public void renderTransactionList(ArrayList<TransactionRenderModel> transactionRenderModels) {
+        mListView.setAdapter(new TransactionAdapter(this, transactionRenderModels));
+
     }
 }
