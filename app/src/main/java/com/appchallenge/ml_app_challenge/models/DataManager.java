@@ -55,9 +55,8 @@ public class DataManager {
                     new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
             mOverallTransactions = fetchList(context, "accountTransactions.json",
                     new TypeToken<ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>>>(){}.getType());
-            Timber.i("Test");
         }catch(Exception ex){
-            Timber.i("Unable to parse data from file: %s", ex.toString());
+            Timber.e("Unable to parse data from file: %s", ex.toString());
         }
     }
 
@@ -78,13 +77,10 @@ public class DataManager {
     private String loadJSONFromAsset(Context context, String fileName) {
         String json = "";
 
-        if(context == null){
+        if(context == null || fileName == null){
             return json;
         }
 
-        if(fileName == null){
-            return json;
-        }
         try {
             AssetManager assetManager = context.getAssets();
             InputStream is = assetManager.open(fileName);
