@@ -10,15 +10,13 @@ import android.widget.ListView;
 
 import com.appchallenge.ml_app_challenge.R;
 import com.appchallenge.ml_app_challenge.adapters.TransactionAdapter;
-import com.appchallenge.ml_app_challenge.models.Account;
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 import com.appchallenge.ml_app_challenge.models.DataManager;
-import com.appchallenge.ml_app_challenge.models.TransactionEvent;
 import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
 import com.appchallenge.ml_app_challenge.presenters.AccountTransactionPresenter;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,14 +46,14 @@ public class AccountTransactionActivity extends AppCompatActivity implements Acc
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Account account = (Account) getIntent().getSerializableExtra("account");
+        AccountModel accountModel = (AccountModel) getIntent().getSerializableExtra("account");
 
         DataManager dataManager = DataManager.getInstance(this);
 
         mAccountTransactionPresenter = new AccountTransactionPresenter(this, dataManager);
         mAccountTransactionPresenter.onAttach(this);
-        if(account != null) {
-            mAccountTransactionPresenter.computeAccount(account);
+        if(accountModel != null) {
+            mAccountTransactionPresenter.computeAccount(accountModel);
         }
         else{
             mAccountTransactionPresenter.computeAllTransactions();

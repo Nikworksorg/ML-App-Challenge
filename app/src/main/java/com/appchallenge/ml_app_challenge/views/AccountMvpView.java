@@ -1,8 +1,6 @@
 package com.appchallenge.ml_app_challenge.views;
 
-import com.appchallenge.ml_app_challenge.models.Account;
-
-import java.util.ArrayList;
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 
 /**
  * Created by nikhilthiruvengadam on 12/19/17.
@@ -10,9 +8,9 @@ import java.util.ArrayList;
 
 public interface AccountMvpView extends MvpView{
     public void quitApplication();
-    public void openAccountTransaction(Account account);
-    public void renderChequingAccount(Account account);
-    public void renderSavingsAccount(Account account);
-    public void renderTfsaAccount(Account account);
+    public void openAccountTransaction(AccountModel accountModel);
+    public void renderChequingAccount(AccountModel accountModel);
+    public void renderSavingsAccount(AccountModel accountModel);
+    public void renderTfsaAccount(AccountModel accountModel);
     public void renderTotal(String total);
 }

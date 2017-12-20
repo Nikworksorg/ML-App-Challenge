@@ -8,15 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.appchallenge.ml_app_challenge.R;
-import com.appchallenge.ml_app_challenge.models.Account;
-import com.appchallenge.ml_app_challenge.models.TransactionEvent;
 import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 /**
  * Created by nikhilthiruvengadam on 12/20/17.

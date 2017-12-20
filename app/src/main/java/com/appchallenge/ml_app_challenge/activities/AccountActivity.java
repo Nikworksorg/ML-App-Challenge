@@ -9,11 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.appchallenge.ml_app_challenge.R;
-import com.appchallenge.ml_app_challenge.models.Account;
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.presenters.AccountPresenter;
 import com.appchallenge.ml_app_challenge.views.AccountMvpView;
@@ -114,36 +113,36 @@ public class AccountActivity extends AppCompatActivity implements AccountMvpView
     }
 
     @Override
-    public void openAccountTransaction(Account account) {
+    public void openAccountTransaction(AccountModel accountModel) {
         Intent intent = AccountTransactionActivity.getStartIntent(this);
-        intent.putExtra("account", account);
+        intent.putExtra("account", accountModel);
         startActivity(intent);
     }
 
     @Override
-    public void renderChequingAccount(Account account) {
-        if(account != null) {
-            mChequingAccountTitle.setText(account.getmDisplayName());
-            mChequingAccountNumber.setText(account.getmAccountNumber());
-            mChequingAccountBalance.setText(String.format("$%.2f", account.getmBalance()));
+    public void renderChequingAccount(AccountModel accountModel) {
+        if(accountModel != null) {
+            mChequingAccountTitle.setText(accountModel.getmDisplayName());
+            mChequingAccountNumber.setText(accountModel.getmAccountNumber());
+            mChequingAccountBalance.setText(String.format("$%.2f", accountModel.getmBalance()));
         }
     }
 
     @Override
-    public void renderSavingsAccount(Account account) {
-        if(account != null) {
-            mSavingsAccountTitle.setText(account.getmDisplayName());
-            mSavingsAccountNumber.setText(account.getmAccountNumber());
-            mSavingsAccountBalance.setText(String.format("$%.2f", account.getmBalance()));
+    public void renderSavingsAccount(AccountModel accountModel) {
+        if(accountModel != null) {
+            mSavingsAccountTitle.setText(accountModel.getmDisplayName());
+            mSavingsAccountNumber.setText(accountModel.getmAccountNumber());
+            mSavingsAccountBalance.setText(String.format("$%.2f", accountModel.getmBalance()));
         }
     }
 
     @Override
-    public void renderTfsaAccount(Account account) {
-        if(account != null) {
-            mTfsaAccountTitle.setText(account.getmDisplayName());
-            mTfsaAccountNumber.setText(account.getmAccountNumber());
-            mTfsaAccountBalance.setText(String.format("$%.2f", account.getmBalance()));
+    public void renderTfsaAccount(AccountModel accountModel) {
+        if(accountModel != null) {
+            mTfsaAccountTitle.setText(accountModel.getmDisplayName());
+            mTfsaAccountNumber.setText(accountModel.getmAccountNumber());
+            mTfsaAccountBalance.setText(String.format("$%.2f", accountModel.getmBalance()));
         }
     }
 

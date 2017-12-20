@@ -1,10 +1,8 @@
 package com.appchallenge.ml_app_challenge.presenters;
 
 import android.content.Context;
-import android.content.Intent;
 
-import com.appchallenge.ml_app_challenge.activities.AccountActivity;
-import com.appchallenge.ml_app_challenge.models.Account;
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 import com.appchallenge.ml_app_challenge.models.DataManager;
 import com.appchallenge.ml_app_challenge.views.AccountMvpView;
 
@@ -32,17 +30,17 @@ public class AccountPresenter <V extends AccountMvpView> extends BasePresenter<V
 
     @Override
     public void render() {
-        ArrayList<Account>accounts = getmDataManager().getmAccountList();
-        if(accounts != null){
-            for(Account account: accounts) {
-                if(account.getmId().equals(CHEQUING_ACCOUNT_ID)){
-                    getMvpView().renderChequingAccount(account);
-                }else if(account.getmId().equals(SAVINGS_ACCOUNT_ID)) {
-                    getMvpView().renderSavingsAccount(account);
-                }else if(account.getmId().equals(TFSA_ACCOUNT_ID)){
-                    getMvpView().renderTfsaAccount(account);
+        ArrayList<AccountModel> accountModels = getmDataManager().getmAccountModelList();
+        if(accountModels != null){
+            for(AccountModel accountModel : accountModels) {
+                if(accountModel.getmId().equals(CHEQUING_ACCOUNT_ID)){
+                    getMvpView().renderChequingAccount(accountModel);
+                }else if(accountModel.getmId().equals(SAVINGS_ACCOUNT_ID)) {
+                    getMvpView().renderSavingsAccount(accountModel);
+                }else if(accountModel.getmId().equals(TFSA_ACCOUNT_ID)){
+                    getMvpView().renderTfsaAccount(accountModel);
                 }
-                total += account.getmBalance();
+                total += accountModel.getmBalance();
             }
             getMvpView().renderTotal(String.format("$%.2f", total));
         }
@@ -50,16 +48,16 @@ public class AccountPresenter <V extends AccountMvpView> extends BasePresenter<V
 
     @Override
     public void computeTransactionActivity(Integer accountId) {
-        ArrayList<Account>accounts = getmDataManager().getmAccountList();
-        Account passingAccount = null;
-        if(accounts != null){
-            for(Account account: accounts) {
-                if(account.getmId().equals(accountId)){
-                    passingAccount = account;
+        ArrayList<AccountModel> accountModels = getmDataManager().getmAccountModelList();
+        AccountModel passingAccountModel = null;
+        if(accountModels != null){
+            for(AccountModel accountModel : accountModels) {
+                if(accountModel.getmId().equals(accountId)){
+                    passingAccountModel = accountModel;
                     break;
                 }
             }
-            getMvpView().openAccountTransaction(passingAccount);
+            getMvpView().openAccountTransaction(passingAccountModel);
         }
 
 

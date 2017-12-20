@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by nikhilthiruvengadam on 12/19/17.
  */
 
-public class TransactionActivity implements Serializable {
+public class TransactionActivityModel implements Serializable {
     @SerializedName("id")
     private Integer mId;
 

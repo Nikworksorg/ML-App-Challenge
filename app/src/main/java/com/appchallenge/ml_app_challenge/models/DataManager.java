@@ -23,11 +23,11 @@ public class DataManager {
     private final String SHARED_PREFERENCES_KEY = "com.appchallenge.ml_app_challenge.sharedPreferences";
     private final String SHOW_WELCOME = "com.appchallenge.ml_app_challenge.showwelcome";
     private static DataManager mDataManager;
-    private ArrayList<TransactionEvent> mCheckingAccountTransactions;
-    private ArrayList<TransactionEvent> mSavingsAccountTransactions;
-    private ArrayList<TransactionEvent> mTfsaAccountTransactions;
-    private ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>> mOverallTransactions;
-    private ArrayList<Account> mAccountList;
+    private ArrayList<TransactionEventModel> mCheckingAccountTransactions;
+    private ArrayList<TransactionEventModel> mSavingsAccountTransactions;
+    private ArrayList<TransactionEventModel> mTfsaAccountTransactions;
+    private ArrayList<HashMap<Integer, ArrayList<TransactionEventModel>>> mOverallTransactions;
+    private ArrayList<AccountModel> mAccountModelList;
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -45,16 +45,16 @@ public class DataManager {
 
     private void initialiseData(Context context){
         try {
-            mAccountList = fetchList(context, "listOfAccounts.json",
-                    new TypeToken<ArrayList<Account>>(){}.getType());
+            mAccountModelList = fetchList(context, "listOfAccounts.json",
+                    new TypeToken<ArrayList<AccountModel>>(){}.getType());
             mCheckingAccountTransactions = fetchList(context, "chequingAccount.json",
-                    new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
+                    new TypeToken<ArrayList<TransactionEventModel>>(){}.getType());
             mSavingsAccountTransactions = fetchList(context, "savingsAccount.json",
-                    new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
+                    new TypeToken<ArrayList<TransactionEventModel>>(){}.getType());
             mTfsaAccountTransactions = fetchList(context, "TfsaAccount.json",
-                    new TypeToken<ArrayList<TransactionEvent>>(){}.getType());
+                    new TypeToken<ArrayList<TransactionEventModel>>(){}.getType());
             mOverallTransactions = fetchList(context, "accountTransactions.json",
-                    new TypeToken<ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>>>(){}.getType());
+                    new TypeToken<ArrayList<HashMap<Integer, ArrayList<TransactionEventModel>>>>(){}.getType());
         }catch(Exception ex){
             Timber.e("Unable to parse data from file: %s", ex.toString());
         }
@@ -98,23 +98,23 @@ public class DataManager {
         return json;
     }
 
-    public ArrayList<TransactionEvent> getmCheckingAccountTransactions() {
+    public ArrayList<TransactionEventModel> getmCheckingAccountTransactions() {
         return mCheckingAccountTransactions;
     }
 
-    public ArrayList<TransactionEvent> getmSavingsAccountTransactions() {
+    public ArrayList<TransactionEventModel> getmSavingsAccountTransactions() {
         return mSavingsAccountTransactions;
     }
 
-    public ArrayList<TransactionEvent> getmTfsaAccountTransactions() {
+    public ArrayList<TransactionEventModel> getmTfsaAccountTransactions() {
         return mTfsaAccountTransactions;
     }
 
-    public ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>> getmOverallTransactions() {
+    public ArrayList<HashMap<Integer, ArrayList<TransactionEventModel>>> getmOverallTransactions() {
         return mOverallTransactions;
     }
 
-    public ArrayList<Account> getmAccountList() {
-        return mAccountList;
+    public ArrayList<AccountModel> getmAccountModelList() {
+        return mAccountModelList;
     }
 }

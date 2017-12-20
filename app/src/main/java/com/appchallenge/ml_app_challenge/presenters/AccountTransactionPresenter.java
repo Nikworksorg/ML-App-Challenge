@@ -3,18 +3,16 @@ package com.appchallenge.ml_app_challenge.presenters;
 import android.content.Context;
 
 import com.appchallenge.ml_app_challenge.R;
-import com.appchallenge.ml_app_challenge.models.Account;
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 import com.appchallenge.ml_app_challenge.models.DataManager;
-import com.appchallenge.ml_app_challenge.models.TransactionActivity;
-import com.appchallenge.ml_app_challenge.models.TransactionEvent;
+import com.appchallenge.ml_app_challenge.models.TransactionActivityModel;
+import com.appchallenge.ml_app_challenge.models.TransactionEventModel;
 import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
 import com.appchallenge.ml_app_challenge.utils.DateUtils;
 import com.appchallenge.ml_app_challenge.views.AccountTransactionMvpView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import timber.log.Timber;
 
 /**
  * Created by nikhilthiruvengadam on 12/19/17.
@@ -26,17 +24,17 @@ public class AccountTransactionPresenter<V extends AccountTransactionMvpView> ex
     }
 
     @Override
-    public void computeAccount(Account account) {
+    public void computeAccount(AccountModel accountModel) {
         String title = "";
-        if (account != null) {
-            ArrayList<TransactionEvent> accountTransactions = null;
-            if (account.getmId().equals(AccountPresenter.CHEQUING_ACCOUNT_ID)) {
+        if (accountModel != null) {
+            ArrayList<TransactionEventModel> accountTransactions = null;
+            if (accountModel.getmId().equals(AccountPresenter.CHEQUING_ACCOUNT_ID)) {
                 title = getmContext().getString(R.string.chequing_transactions);
                 accountTransactions = getmDataManager().getmCheckingAccountTransactions();
-            } else if (account.getmId().equals(AccountPresenter.SAVINGS_ACCOUNT_ID)) {
+            } else if (accountModel.getmId().equals(AccountPresenter.SAVINGS_ACCOUNT_ID)) {
                 title = getmContext().getString(R.string.savings_transactions);
                 accountTransactions = getmDataManager().getmSavingsAccountTransactions();
-            } else if (account.getmId().equals(AccountPresenter.TFSA_ACCOUNT_ID)) {
+            } else if (accountModel.getmId().equals(AccountPresenter.TFSA_ACCOUNT_ID)) {
                 title = getmContext().getString(R.string.tfsa_transactions);
                 accountTransactions = getmDataManager().getmTfsaAccountTransactions();
 
@@ -52,8 +50,8 @@ public class AccountTransactionPresenter<V extends AccountTransactionMvpView> ex
     @Override
     public void computeAllTransactions() {
         ArrayList<TransactionRenderModel> transactionRenderModels = new ArrayList<>();
-        ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>> allTransactions = getmDataManager().getmOverallTransactions();
-        for (HashMap<Integer, ArrayList<TransactionEvent>> transaction : allTransactions) {
+        ArrayList<HashMap<Integer, ArrayList<TransactionEventModel>>> allTransactions = getmDataManager().getmOverallTransactions();
+        for (HashMap<Integer, ArrayList<TransactionEventModel>> transaction : allTransactions) {
             for (Integer key :
                     transaction.keySet()) {
                 TransactionRenderModel transactionRenderModel = new TransactionRenderModel();
@@ -72,45 +70,45 @@ public class AccountTransactionPresenter<V extends AccountTransactionMvpView> ex
         getMvpView().renderTransactionList(transactionRenderModels);
     }
 
-    private ArrayList<TransactionRenderModel> populateAccountRenderModel(ArrayList<TransactionEvent> accountTransactions, ArrayList<TransactionRenderModel> transactionRenderModels){
-        for (TransactionEvent transactionEvent : accountTransactions) {
-            if (transactionEvent.getmDate() != null && DateUtils.isValidDate(transactionEvent.getmDate())) {
+    private ArrayList<TransactionRenderModel> populateAccountRenderModel(ArrayList<TransactionEventModel> accountTransactions, ArrayList<TransactionRenderModel> transactionRenderModels){
+        for (TransactionEventModel transactionEventModel : accountTransactions) {
+            if (transactionEventModel.getmDate() != null && DateUtils.isValidDate(transactionEventModel.getmDate())) {
                 TransactionRenderModel transactionRenderModel = new TransactionRenderModel();
-                transactionRenderModel.setmDate(DateUtils.formatDate(transactionEvent.getmDate()));
+                transactionRenderModel.setmDate(DateUtils.formatDate(transactionEventModel.getmDate()));
                 transactionRenderModel.setmRowType(TransactionRenderModel.RowType.DATE_LIST_ITEM.ordinal());
                 transactionRenderModels.add(transactionRenderModel);
-                ArrayList<TransactionActivity> transactionActivities = transactionEvent.getmTransactionActivities();
-                for (TransactionActivity transactionActivity : transactionActivities) {
-                    if (transactionActivity.getmTransactionUuid() != null ||
-                            transactionActivity.getmWithDrawableAmount() != null ||
-                            transactionActivity.getmWithDrawableAmount() != null ||
-                            transactionActivity.getmDepositAmount() != null ||
-                            transactionActivity.getmDescription() != null) {
+                ArrayList<TransactionActivityModel> transactionActivities = transactionEventModel.getmTransactionActivities();
+                for (TransactionActivityModel transactionActivityModel : transactionActivities) {
+                    if (transactionActivityModel.getmTransactionUuid() != null ||
+                            transactionActivityModel.getmWithDrawableAmount() != null ||
+                            transactionActivityModel.getmWithDrawableAmount() != null ||
+                            transactionActivityModel.getmDepositAmount() != null ||
+                            transactionActivityModel.getmDescription() != null) {
                         TransactionRenderModel transactionRenderModel2 = new TransactionRenderModel();
-                        if (transactionActivity.getmTransactionUuid() != null) {
+                        if (transactionActivityModel.getmTransactionUuid() != null) {
                             transactionRenderModel2.setmUuid(String.format("%s: %d", getmContext().getString(R.string.uuid),
-                                    transactionActivity.getmTransactionUuid()));
+                                    transactionActivityModel.getmTransactionUuid()));
                         }
 
-                        if (transactionActivity.getmWithDrawableAmount() != null) {
+                        if (transactionActivityModel.getmWithDrawableAmount() != null) {
                             transactionRenderModel2.setmAmount(String.format("%s: $%s", getmContext().getString(R.string.withdrawal),
-                                    transactionActivity.getmWithDrawableAmount()));
-                        } else if (transactionActivity.getmDepositAmount() != null) {
+                                    transactionActivityModel.getmWithDrawableAmount()));
+                        } else if (transactionActivityModel.getmDepositAmount() != null) {
                             transactionRenderModel2.setmAmount(String.format("%s: $%s", getmContext().getString(R.string.deposit),
-                                    transactionActivity.getmDepositAmount()));
+                                    transactionActivityModel.getmDepositAmount()));
                         }
 
-                        if (transactionActivity.getmBalance() != null) {
+                        if (transactionActivityModel.getmBalance() != null) {
                             transactionRenderModel2.setmBalance(String.format("%s: $%s", getmContext().getString(R.string.balance),
-                                    transactionActivity.getmBalance()));
+                                    transactionActivityModel.getmBalance()));
                         }
 
-                        if (transactionActivity.getmDescription() != null) {
+                        if (transactionActivityModel.getmDescription() != null) {
                             transactionRenderModel2.setmDescription(String.format("%s: %s", getmContext().getString(R.string.description),
-                                    transactionActivity.getmDescription()));
+                                    transactionActivityModel.getmDescription()));
                         }
                         transactionRenderModel2.setmRowType(TransactionRenderModel.RowType.ACCOUNT_LIST_ITEM.ordinal());
-                        if (transactionActivities.indexOf(transactionActivity) == transactionActivities.size() - 1) {
+                        if (transactionActivities.indexOf(transactionActivityModel) == transactionActivities.size() - 1) {
                             transactionRenderModel2.setSeparatorHidden(true);
                         }
 
