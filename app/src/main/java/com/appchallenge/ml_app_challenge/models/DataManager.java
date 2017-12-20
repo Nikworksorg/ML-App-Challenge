@@ -20,6 +20,8 @@ import timber.log.Timber;
  */
 
 public class DataManager {
+    private final String SHARED_PREFERENCES_KEY = "com.appchallenge.ml_app_challenge.sharedPreferences";
+    private final String SHOW_WELCOME = "com.appchallenge.ml_app_challenge.showwelcome";
     private static DataManager mDataManager;
     private ArrayList<TransactionEvent> mCheckingAccountTransactions;
     private ArrayList<TransactionEvent> mSavingsAccountTransactions;
@@ -59,6 +61,16 @@ public class DataManager {
         return new Gson().fromJson(loadJSONFromAsset(context, fileName), type);
     }
 
+    public boolean saveShowWelcome(Context context, boolean initialSetup) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
+        return sharedPreferences.edit().putBoolean(SHOW_WELCOME, initialSetup).commit();
+    }
+
+    public boolean loadShowWelcome(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
+        return sharedPreferences.getBoolean(SHOW_WELCOME, true);
+    }
+
     private String loadJSONFromAsset(Context context, String fileName) {
         String json = "";
 
@@ -84,5 +96,25 @@ public class DataManager {
 
         Timber.i("json output: %s", json);
         return json;
+    }
+
+    public ArrayList<TransactionEvent> getmCheckingAccountTransactions() {
+        return mCheckingAccountTransactions;
+    }
+
+    public ArrayList<TransactionEvent> getmSavingsAccountTransactions() {
+        return mSavingsAccountTransactions;
+    }
+
+    public ArrayList<TransactionEvent> getmTfsaAccountTransactions() {
+        return mTfsaAccountTransactions;
+    }
+
+    public ArrayList<HashMap<Integer, ArrayList<TransactionEvent>>> getmOverallTransactions() {
+        return mOverallTransactions;
+    }
+
+    public ArrayList<Account> getmAccountList() {
+        return mAccountList;
     }
 }
