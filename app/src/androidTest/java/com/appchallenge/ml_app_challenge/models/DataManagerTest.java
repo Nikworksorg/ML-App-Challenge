@@ -1,30 +1,43 @@
 package com.appchallenge.ml_app_challenge.models;
 
-import android.content.Context;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.ApplicationTestCase;
-
-import com.appchallenge.ml_app_challenge.activities.WelcomeActivity;
-
 import org.junit.Test;
-import org.mockito.Mock;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by nikhilthiruvengadam on 12/19/17.
+ * Created by nikhilthiruvengadam on 12/21/17.
  */
 public class DataManagerTest {
-
-
-    @Mock
-    Context context;
-
-    DataManager dataManager;
-
     @Test
     public void getInstance() throws Exception {
-        dataManager = DataManager.getInstance(context);
-        assertNull(dataManager);
     }
+
+    @Test
+    public void saveShowWelcome() throws Exception {
+    }
+
+    @Test
+    public void loadShowWelcome() throws Exception {
+    }
+
+    @Test
+    public void getmCheckingAccountTransactions() throws Exception {
+    }
+
+    @Test
+    public void getmSavingsAccountTransactions() throws Exception {
+    }
+
+    @Test
+    public void getmTfsaAccountTransactions() throws Exception {
+    }
+
+    @Test
+    public void getmOverallTransactions() throws Exception {
+    }
+
+    @Test
+    public void getmAccountModelList() throws Exception {
+    }
+
 }
