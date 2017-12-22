@@ -13,10 +13,6 @@ import java.util.ArrayList;
  */
 
 public class AccountPresenter <V extends AccountMvpView> extends BasePresenter<V> implements AccountMvpPresenter<V> {
-    public static final Integer CHEQUING_ACCOUNT_ID = 10;
-    public static final Integer SAVINGS_ACCOUNT_ID = 12;
-    public static final Integer TFSA_ACCOUNT_ID = 19;
-    public static final Integer ALL_TRANSACTION_ID = -1;
     private Double total = 0.0;
 
     public AccountPresenter(Context context, DataManager dataManager) {
@@ -29,15 +25,15 @@ public class AccountPresenter <V extends AccountMvpView> extends BasePresenter<V
     }
 
     @Override
-    public void render() {
+    public void computeTotal() {
         ArrayList<AccountModel> accountModels = getmDataManager().getmAccountModelList();
         if(accountModels != null){
             for(AccountModel accountModel : accountModels) {
-                if(accountModel.getmId().equals(CHEQUING_ACCOUNT_ID)){
+                if(accountModel.getmId().equals(AccountModel.CHEQUING_ACCOUNT_ID)){
                     getMvpView().renderChequingAccount(accountModel);
-                }else if(accountModel.getmId().equals(SAVINGS_ACCOUNT_ID)) {
+                }else if(accountModel.getmId().equals(AccountModel.SAVINGS_ACCOUNT_ID)) {
                     getMvpView().renderSavingsAccount(accountModel);
-                }else if(accountModel.getmId().equals(TFSA_ACCOUNT_ID)){
+                }else if(accountModel.getmId().equals(AccountModel.TFSA_ACCOUNT_ID)){
                     getMvpView().renderTfsaAccount(accountModel);
                 }
                 total += accountModel.getmBalance();

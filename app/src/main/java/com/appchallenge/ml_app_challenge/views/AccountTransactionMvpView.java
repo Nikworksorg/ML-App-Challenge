@@ -1,5 +1,6 @@
 package com.appchallenge.ml_app_challenge.views;
 
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
 
 import java.util.ArrayList;
@@ -9,6 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface AccountTransactionMvpView extends MvpView {
-    public void renderTitle(String title);
+    public void renderTitle(AccountModel accountModel);
     public void renderTransactionList(ArrayList<TransactionRenderModel> transactionRenderModels);
 }

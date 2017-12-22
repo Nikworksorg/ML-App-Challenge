@@ -9,6 +9,11 @@ import java.io.Serializable;
  */
 
 public class AccountModel implements Serializable {
+    public static final Integer CHEQUING_ACCOUNT_ID = 10;
+    public static final Integer SAVINGS_ACCOUNT_ID = 12;
+    public static final Integer TFSA_ACCOUNT_ID = 19;
+    public static final Integer ALL_TRANSACTION_ID = -1;
+
     @SerializedName("id")
     private Integer mId;
 
@@ -35,5 +40,10 @@ public class AccountModel implements Serializable {
 
     public Double getmBalance() {
         return mBalance;
+    }
+
+    public boolean equals(AccountModel accountModel){
+        if(accountModel == null) return false;
+        return (this.getmId()).equals(accountModel.getmId());
     }
 }

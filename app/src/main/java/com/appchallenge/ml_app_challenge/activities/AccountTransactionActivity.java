@@ -72,9 +72,9 @@ public class AccountTransactionActivity extends AppCompatActivity implements Acc
     }
 
     @Override
-    public void renderTitle(String title) {
-        if(title != null) {
-            setTitle(title);
+    public void renderTitle(AccountModel accountModel) {
+        if(accountModel != null) {
+            setTitle(accountModel.getmDisplayName());
         }
     }
 

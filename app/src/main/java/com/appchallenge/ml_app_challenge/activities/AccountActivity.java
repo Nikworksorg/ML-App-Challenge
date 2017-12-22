@@ -82,7 +82,7 @@ public class AccountActivity extends AppCompatActivity implements AccountMvpView
 
         mAccountPresenter = new AccountPresenter(this, dataManager);
         mAccountPresenter.onAttach(this);
-        mAccountPresenter.render();
+        mAccountPresenter.computeTotal();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class AccountActivity extends AppCompatActivity implements AccountMvpView
 
     @Override
     public void quitApplication() {
-         mAccountPresenter.setShowWelcome();
+        mAccountPresenter.setShowWelcome();
         finish();
     }
 
@@ -156,21 +156,21 @@ public class AccountActivity extends AppCompatActivity implements AccountMvpView
 
     @OnClick(R.id.chequing_account_cell)
     public void onChequingCellClicked(View Sender){
-        mAccountPresenter.computeTransactionActivity(AccountPresenter.CHEQUING_ACCOUNT_ID);
+        mAccountPresenter.computeTransactionActivity(AccountModel.CHEQUING_ACCOUNT_ID);
     }
 
     @OnClick(R.id.savings_account_cell)
     public void onSavingsCellClicked(View Sender){
-        mAccountPresenter.computeTransactionActivity(AccountPresenter.SAVINGS_ACCOUNT_ID);
+        mAccountPresenter.computeTransactionActivity(AccountModel.SAVINGS_ACCOUNT_ID);
     }
 
     @OnClick(R.id.tfsa_account_cell)
     public void onTfsaCellClicked(View Sender){
-        mAccountPresenter.computeTransactionActivity(AccountPresenter.TFSA_ACCOUNT_ID);
+        mAccountPresenter.computeTransactionActivity(AccountModel.TFSA_ACCOUNT_ID);
     }
 
     @OnClick(R.id.all_transactions_cell)
     public void onAllTransactionsCellClicked(View Sender){
-        mAccountPresenter.computeTransactionActivity(AccountPresenter.ALL_TRANSACTION_ID);
+        mAccountPresenter.computeTransactionActivity(AccountModel.ALL_TRANSACTION_ID);
     }
 }

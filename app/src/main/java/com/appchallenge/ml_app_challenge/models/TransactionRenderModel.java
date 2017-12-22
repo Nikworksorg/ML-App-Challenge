@@ -16,21 +16,22 @@ public class TransactionRenderModel implements Serializable{
     };
 
 
-    private String mAccountName;
+    private Integer mAccountId;
     private String mDate;
-    private String mUuid;
+    private Long mUuid;
     private String mAmount;
     private String mBalance;
     private String mDescription ;
     private Integer mRowType = -1;
     private Boolean isSeparatorHidden = false;
+    private Boolean isDeposit = false;
 
-    public String getmAccountName() {
-        return mAccountName;
+    public Integer getmAccountId() {
+        return mAccountId;
     }
 
-    public void setmAccountName(String mAccountName) {
-        this.mAccountName = mAccountName;
+    public void setmAccountId(Integer mAccountId) {
+        this.mAccountId = mAccountId;
     }
 
     public String getmDate() {
@@ -41,11 +42,11 @@ public class TransactionRenderModel implements Serializable{
         this.mDate = mDate;
     }
 
-    public String getmUuid() {
+    public Long getmUuid() {
         return mUuid;
     }
 
-    public void setmUuid(String mUuid) {
+    public void setmUuid(Long mUuid) {
         this.mUuid = mUuid;
     }
 
@@ -87,5 +88,18 @@ public class TransactionRenderModel implements Serializable{
 
     public void setSeparatorHidden(Boolean separatorHidden) {
         isSeparatorHidden = separatorHidden;
+    }
+
+    public Boolean getDeposit() {
+        return isDeposit;
+    }
+
+    public void setDeposit(Boolean deposit) {
+        isDeposit = deposit;
+    }
+
+    public boolean equals(TransactionRenderModel transactionRenderModel){
+        if(transactionRenderModel == null) return false;
+        return (this.getmUuid()).equals(transactionRenderModel.getmUuid());
     }
 }

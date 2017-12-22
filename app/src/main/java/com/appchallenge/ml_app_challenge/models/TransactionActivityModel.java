@@ -57,4 +57,9 @@ public class TransactionActivityModel implements Serializable {
     public String getmDepositAmount() {
         return mDepositAmount;
     }
+
+    public boolean equals(TransactionActivityModel transactionActivityModel){
+        if(transactionActivityModel == null) return false;
+        return (this.getmId()).equals(transactionActivityModel.getmId());
+    }
 }

@@ -60,7 +60,7 @@ public class DataManager {
         }
     }
 
-    private <T> ArrayList<T> fetchList(Context context, String fileName, Type type) {
+    public <T> ArrayList<T> fetchList(Context context, String fileName, Type type) {
         return new Gson().fromJson(loadJSONFromAsset(context, fileName), type);
     }
 
@@ -74,7 +74,7 @@ public class DataManager {
         return sharedPreferences.getBoolean(SHOW_WELCOME, true);
     }
 
-    private String loadJSONFromAsset(Context context, String fileName) {
+    public String loadJSONFromAsset(Context context, String fileName) {
         String json = "";
 
         if(context == null || fileName == null){

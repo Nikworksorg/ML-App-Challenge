@@ -1,6 +1,7 @@
 package com.appchallenge.ml_app_challenge.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.appchallenge.ml_app_challenge.R;
+import com.appchallenge.ml_app_challenge.models.AccountModel;
 import com.appchallenge.ml_app_challenge.models.TransactionRenderModel;
 
 import java.util.ArrayList;
@@ -24,11 +26,11 @@ public class TransactionAdapter extends BaseAdapter {
     private TransactionAdapter.AccountNameViewHolder mAccountNameViewHolder;
     private TransactionAdapter.DateViewHolder mDateViewHolder;
     private TransactionAdapter.AccountViewHolder mAccountViewHolder;
-    private Activity mActivity;
+    private Context mContext;
     private ArrayList<TransactionRenderModel> mTransactionRenderModels;
 
-    public TransactionAdapter(Activity activity, ArrayList<TransactionRenderModel> transactionRenderModels) {
-        mActivity = activity;
+    public TransactionAdapter(Context context, ArrayList<TransactionRenderModel> transactionRenderModels) {
+        mContext = context;
         mTransactionRenderModels = transactionRenderModels;
     }
 
@@ -112,7 +114,7 @@ public class TransactionAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater)
-                mActivity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         final TransactionRenderModel transactionRenderModel = mTransactionRenderModels.get(position);
 
@@ -124,7 +126,13 @@ public class TransactionAdapter extends BaseAdapter {
             } else {
                 mAccountNameViewHolder = (AccountNameViewHolder) convertView.getTag();
             }
-            mAccountNameViewHolder.mAccountName.setText(transactionRenderModel.getmAccountName());
+            if(transactionRenderModel.getmAccountId() == AccountModel.CHEQUING_ACCOUNT_ID){
+                mAccountNameViewHolder.mAccountName.setText(String.format("%s", mContext.getString(R.string.chequing_transactions)));
+            }else if(transactionRenderModel.getmAccountId() == AccountModel.SAVINGS_ACCOUNT_ID){
+                mAccountNameViewHolder.mAccountName.setText(String.format("%s", mContext.getString(R.string.savings_transactions)));
+            }else if(transactionRenderModel.getmAccountId() == AccountModel.TFSA_ACCOUNT_ID) {
+            mAccountNameViewHolder.mAccountName.setText(String.format("%s", mContext.getString(R.string.tfsa_transactions)));
+            }
         } else if (getItemViewType(position) == TransactionRenderModel.RowType.DATE_LIST_ITEM.ordinal()) {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.layout_transaction_date_list_item, null);
@@ -142,10 +150,12 @@ public class TransactionAdapter extends BaseAdapter {
             } else {
                 mAccountViewHolder = (AccountViewHolder) convertView.getTag();
             }
-            mAccountViewHolder.mUuid.setText(transactionRenderModel.getmUuid());
-            mAccountViewHolder.mAmount.setText(transactionRenderModel.getmAmount());
-            mAccountViewHolder.mBalance.setText(transactionRenderModel.getmBalance());
-            mAccountViewHolder.mDescription.setText(transactionRenderModel.getmDescription());
+            mAccountViewHolder.mUuid.setText(String.format("%s: %s", mContext.getString(R.string.uuid),  transactionRenderModel.getmUuid()));
+            mAccountViewHolder.mAmount.setText(String.format("%s: %s",
+                    ((transactionRenderModel.getDeposit())?mContext.getString(R.string.deposit):mContext.getString(R.string.withdrawal))
+                    , transactionRenderModel.getmAmount()));
+            mAccountViewHolder.mBalance.setText(String.format("%s: %s",mContext.getString(R.string.balance), transactionRenderModel.getmBalance()));
+            mAccountViewHolder.mDescription.setText(String.format("%s: %s",mContext.getString(R.string.description), transactionRenderModel.getmDescription()));
             mAccountViewHolder.mSeparator.setVisibility((transactionRenderModel.getSeparatorHidden())?View.GONE:View.VISIBLE);
         }
         return convertView;
