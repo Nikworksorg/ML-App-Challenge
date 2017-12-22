@@ -54,7 +54,6 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeMvpView
     public void openAccountActivity() {
         Intent intent = AccountActivity.getStartIntent(this);
         startActivity(intent);
-        finish();
     }
 
     @OnClick(R.id.open_button) void onOpenButtonClick() {
